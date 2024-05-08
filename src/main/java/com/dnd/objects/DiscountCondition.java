@@ -1,5 +1,5 @@
 package com.dnd.objects;
 
-public class DiscountCondition {
-
+public interface DiscountCondition {
+	boolean checkDiscount(Screen screen);
 }
