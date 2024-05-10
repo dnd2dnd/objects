@@ -23,8 +23,4 @@ public class Movie {
 	public int getPrice() {
 		return price.getMoney();
 	}
-
-	public int getDiscountPrice() {
-		discountPolicy.get
-	}
 }

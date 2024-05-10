@@ -47,27 +47,29 @@ public class CommandLineApplication implements CommandLineRunner {
 			screens.add(Screen.of(movieB, i, LocalDateTime.of(2024, 5, 8, 6, 0).plus(duration)));
 		}
 
-		for (int i=0; i<=screens.size(); i++) {
+		for (int i=0; i<screens.size(); i++) {
 			System.out.println("Screen Number " + i+1 + ", " + screens.get(i));
 		}
-		// for (int i=1; i<=movies.size(); i++) {
-		// 	System.out.println("Movie Number + " + i + " Movie Info : " + movies.get(i));
-		// }
-		System.out.println("0 입력시 종료, 1 입력시 예약시작");
 
+		System.out.println("1 입력시 예약시작, 다른 단어 입력시 종료");
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
 		while (true) {
 
-
 			try {
-				int x = System.in.read() - 48;
-				if (x == 0) {
+				int x = Integer.parseInt(br.readLine());
+				if(x == 1) {
+					StringTokenizer st = new StringTokenizer(br.readLine());
+					System.out.println("Screen Number, Person Number 입력");
+					int screenNumber = Integer.parseInt(st.nextToken());
+					int person = Integer.parseInt(st.nextToken());
+					Screen screen = screens.get(screenNumber);
+					int payment = screen.getMovie().getDiscountPolicy().calculateDiscount(screen);
+					Reservation reservation = new Reservation(screen, person, payment);
+					System.out.println(reservation);
+				} else {
 					break;
-				} else if(x == 1) {
-					System.out.println("Screen Number 입력 ");
-					x = System.in.read() - 48;
-					System.out.println("Person Number 입력 ");
-					int person = System.in.read() - 48;
-					Reservation reservation = new Reservation(screens.get(x), person)
 				}
 			} catch (Exception e) {
 				throw new RuntimeException(e);
